@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="userinfo">
+        <div class="info-head">
+            <h1>Данные пользователя</h1>
+            <a href="{{ url_for('logout') }}" class="logout">Выйти из профиля</a>
+        </div>
+        <div class="maininfo">
+            <div class="info-item"><p>Имя:</p>
+                {{ user.name }}</div>
+            <div class="info-item"><p>Фамилия:</p>
+                {{ user.surname }}</div>
+            <div class="info-item"><p>Отчество:</p>
+                {{ user.patronomyc }} </div>
+            <div class="info-item"><p>Школа:</p>
+                {{ user.school }}</div>
+            <div class="info-item"><p>Класс:</p>
+                {{ user.s_class }}</div>
+            <div class="info-item"><p>Преподаватель:</p>
+                {{ user.s_teacher }}</div>
+        </div>
+        <div class="info-head">
+            <h1>Данные о тестах : </h1>
+        </div>
+        <div class="test-info">
+            {% for t in testdata %}
+                <div class="test-item"><p>Название теста</p>
+                    {{ t.Name }} </div>
+                <div class="test-item">
+                    <p>Решено заданий</p>
+                    <p>{{ t.grade }} из 7</p>
+                </div>
+                <div class="test-item">
+                    <p>Дата и время прохождения теста</p>
+                    {{ t.date_time.isoformat(" ","seconds") }}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

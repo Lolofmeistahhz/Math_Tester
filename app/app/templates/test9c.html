@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block content %}
+    {{ super() }}
+    <div class="login-wrapper">
+        <div class="content">
+            <form name="test" method="POST">
+                <div class="item">
+                    <h1>Осталось времени</h1>
+                    <div class="timer-box">
+                        <div class="timer">
+                            <ul class="flex">
+                                <li id="hour"></li>
+                                <li id="minutes"></li>
+                                <li id="seconds"></li>
+                            </ul>
+                        </div>
+                        <ul class="flex time-name">
+                            <li>часы</li>
+                            <li>минуты</li>
+                            <li>секунды</li>
+                        </ul>
+                    </div>
+                </div>
+                {{ FlaskForm.hidden_tag() }}
+                <div class="item">
+                    <h3>Вопрос номер 1</h3>
+                    <p> {{ answer.Question1 }}</p>
+                    {{ FlaskForm.answer1 }}<br>
+                </div>
+                <div class="item">
+                    <h3>Вопрос номер 2</h3>
+                    <p> {{ answer.Question2 }} </p>
+                    <img src="../static/images/formulas.jpg" class="formulas">
+                    {{ FlaskForm.answer2 }}<br>
+                </div>
+                <div class="item">
+                    <h3>Вопрос номер 3</h3>
+                    <p> {{ answer.Question3 }}</p>
+                    {{ FlaskForm.answer3 }}<br>
+                </div>
+                <div class="item">
+                    <h3>Вопрос номер 4</h3>
+                    <p> {{ answer.Question4 }}</p>
+                    {{ FlaskForm.answer4 }}<br>
+                </div>
+                <div class="item">
+                    <h3>Вопрос номер 5</h3>
+                    <p> {{ answer.Question5 }} </p>
+                    {{ FlaskForm.answer5 }}<br>
+                </div>
+                <div class="item">
+                    <h3>Вопрос номер 6</h3>
+                    <p> {{ answer.Question6 }}</p>
+                    {{ FlaskForm.answer6 }}<br>
+                </div>
+                <div class="item">
+                    <h3>Вопрос номер 7</h3>
+                    <p>{{ answer.Question7 }}</p>
+                    {{ FlaskForm.answer7 }}<br>
+                </div>
+                <div class="item">
+                    <div class="c_but">
+                        {{ FlaskForm.button }}<br>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+    <script src="../static/scripts/countdown.function.js"></script>
+{% endblock %}
