@@ -6,10 +6,10 @@
             <a href="{{ url_for('logout') }}" class="logout">Выйти из профиля</a>
         </div>
         <div class="maininfo">
+             <div class="info-item"><p>Фамилия:</p>
+                {{ user.surname }}</div>
             <div class="info-item"><p>Имя:</p>
                 {{ user.name }}</div>
-            <div class="info-item"><p>Фамилия:</p>
-                {{ user.surname }}</div>
             <div class="info-item"><p>Отчество:</p>
                 {{ user.patronomyc }} </div>
             <div class="info-item"><p>Школа:</p>

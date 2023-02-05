@@ -63,19 +63,19 @@ def test_9c():
             Test_result.user == current_user.id).first()
         if not testdata:
             if test_form.validate_on_submit():
-                if int(test_form.answer1.data) == answer.Answer1:
+                if test_form.answer1.data == answer.Answer1:
                     grade += 1
-                if int(test_form.answer2.data) == answer.Answer2:
+                if test_form.answer2.data == answer.Answer2:
                     grade += 1
-                if int(test_form.answer3.data) == answer.Answer3:
+                if test_form.answer3.data == answer.Answer3:
                     grade += 1
-                if int(test_form.answer4.data) == answer.Answer4:
+                if test_form.answer4.data == answer.Answer4:
                     grade += 1
                 if test_form.answer5.data == answer.Answer5:
                     grade += 1
-                if int(test_form.answer6.data) == answer.Answer6:
+                if test_form.answer6.data == answer.Answer6:
                     grade += 1
-                if int(test_form.answer7.data) == answer.Answer7:
+                if test_form.answer7.data == answer.Answer7:
                     grade += 1
                 time = datetime.now()
                 res = Test_result(test=1,user=current_user.id,grade=grade,date_time=time)
@@ -94,7 +94,6 @@ def test_9c():
     return render_template("test9c.html",FlaskForm=test_form,answer=answer,title="Тестирование")
 
 
-
 @app.route('/logout')
 def logout():
     logout_user()
@@ -105,7 +104,6 @@ def profile(id):
     user = User.query.filter_by(id=current_user.id).first()
     testdata = db.session.query(Test_result.grade,Test.Name,Test_result.date_time).filter(Test_result.user == current_user.id).order_by(Test_result.date_time.desc()).limit(1)
     return render_template('profile.html',user=user,testdata=testdata,title="Личный кабинет")
-
 
 @app.route('/admin/test_result')
 def test_result():
@@ -120,21 +118,21 @@ def test_result():
     elif user.usertype == "Пользователь":
         return redirect(url_for('test_9c'))
 
-# @app.route('/a')
-# def adda():
-#     u = User(surname='Камозина',name='Олеся',patronomyc='Владимировна',school='МБОУ СОШ № 67',s_class='9 Б',login='test',password='test')
-#     db.session.add(u)
-#     db.session.commit()
-#
+@app.route('/add/admin/u')
+def adda():
+    u = User(surname='Камозина',name='Олеся',patronomyc='Владимировна',school='secret',s_class='secret',s_teacher='secret',login='admin_bgitu_mathtest',password='bgitu_tester',usertype="Администратор")
+    db.session.add(u)
+    db.session.commit()
 
-# @app.route('/9c')
-# def add9c():
-#     data = Test(Name='Тестирование по математике 9 класс',Question1='График функции y=f(x) симметричен относительно прямой x = 5 и уравнение f(x) = 0 имеет девять различных действительных корней. Чему равна сумма всех этих корней?',Answer1=45,
-#                    Question2='Известно, что a > 1, b > 1. Какая из следующих дробей является наибольшей? (В ответе укажите номер варианта ответа без скобки)',Answer2=3,
-#                    Question3='Карина ехала от дома до парка сначала на маршрутном такси, затем на метро. Причём время движения на маршрутном такси равно времени движения на метро (временем перехода от маршрутного такси до метро пренебрегаем). В случае движения от дома до парка только на маршрутном такси, время движения оказалось бы в 1,5 раза больше затраченного Кариной. Во сколько раз время движения от дома до парка на метро оказалось бы больше времени движения на маршрутном такси?',Answer3=2,
-#                    Question4='Среднее арифметическое двух положительных чисел на 75% больше меньшего из этих чисел. На сколько процентов оно меньше большего из этих чисел?',Answer4=30,
-#                    Question5='Из тройки неповторяющихся цифр составили все возможные различные трёхзначные числа. Сумма этих чисел составила 4884. Определить взятые цифры. (В ответе укажите цифры в порядке возрастания без пробелов и запятых, например "279 и 337")',Answer5='679 и 589',
-#                    Question6='Дан треугольник ABC. Из вершины B проведена биссектриса BD. BD=8√7, AB=21, DC=8. Определить периметр треугольника ABC.',Answer6=60,
-#                    Question7='Пусть a и b – корни квадратного уравнения x² + x - 9 = 0 . Чему равно значение выражения 3a²+4b²+3a+4b+5 ?',Answer7=68)
-#     db.session.add(data)
-#     db.session.commit()
+
+@app.route('/add/test/9c')
+def add9c():
+    data = Test(Name='Тестирование по математике 9 класс',Question1='График функции y=f(x) симметричен относительно прямой x = 5 и уравнение f(x) = 0 имеет девять различных действительных корней. Чему равна сумма всех этих корней?',Answer1=45,
+                   Question2='Известно, что a > 1, b > 1. Какая из следующих дробей является наибольшей? (В ответе укажите номер варианта ответа без скобки)',Answer2=3,
+                   Question3='Карина ехала от дома до парка сначала на маршрутном такси, затем на метро. Причём время движения на маршрутном такси равно времени движения на метро (временем перехода от маршрутного такси до метро пренебрегаем). В случае движения от дома до парка только на маршрутном такси, время движения оказалось бы в 1,5 раза больше затраченного Кариной. Во сколько раз время движения от дома до парка на метро оказалось бы больше времени движения на маршрутном такси?',Answer3=2,
+                   Question4='Среднее арифметическое двух положительных чисел на 75% больше меньшего из этих чисел. На сколько процентов оно меньше большего из этих чисел?',Answer4=30,
+                   Question5='Из тройки неповторяющихся цифр составили все возможные различные трёхзначные числа. Сумма этих чисел составила 4884. Определить взятые цифры. (В ответе укажите цифры в порядке возрастания без пробелов и запятых, например "279 и 337")',Answer5='679 и 589',
+                   Question6='Дан треугольник ABC. Из вершины B проведена биссектриса BD. BD=8√7, AB=21, DC=8. Определить периметр треугольника ABC.',Answer6=60,
+                   Question7='Пусть a и b – корни квадратного уравнения x² + x - 9 = 0 . Чему равно значение выражения 3a²+4b²+3a+4b+5 ?',Answer7=68)
+    db.session.add(data)
+    db.session.commit()

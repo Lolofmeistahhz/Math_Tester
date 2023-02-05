@@ -86,14 +86,17 @@
 
         <div class="frame">
             <div class="frame__content">
-                <video class="frame-media" src="../static/media/bgitu.mp4" autoplay loop muted></video>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/NpoMcRoNIS4"
+                        title="YouTube video player" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen></iframe>
             </div>
         </div>
         <div class="frame frame_bg">
-                <div class="frame__content">
-                    <a href="{{ url_for("test_9c") }}" class="but_link"> Начать тестирование </a>
-                </div>
+            <div class="frame__content">
+                <a href="{{ url_for("test_9c") }}" class="but_link"> Начать тестирование </a>
             </div>
+        </div>
     </section>
 </div>
 </body>
