@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+    {{ super() }}
+    <div class="login-wrapper">
+        <div class="bg">
+            <p>Добро пожаловать в нашу систему тестирования, пожалуйста пройдите процесс авторизации для дальнейшего взаимодействия с системой!</p>
+        </div>
+        <div class="login l_scroll">
+            <div class="l_content">
+                <h1 class="h">Авторизация</h1>
+                {% for cat, msg in get_flashed_messages(True) %}
+
+                    <div class="flash-log {{ cat }}"> {{ msg }}</div>
+                {% endfor %}
+                <form action="" method="post" name="login">
+                    {{ FlaskForm.hidden_tag() }}
+                    <p>
+                        Пожалуйста, введите ваш логин:<br>
+                    </p>
+                    <div class="form-el"> {{ FlaskForm.login(size=30) }}<br></div>
+                    <p>
+                        Пожалуйста, введите ваш пароль:<br>
+                    </p>
+                    <div class="form-el"> {{ FlaskForm.password(size=30) }}<br></div>
+                    <div class="but">
+                        <p>{{ FlaskForm.submit }}</p>
+                    </div>
+                </form>
+                <div class="na">
+                    <a href="{{ url_for('index') }}">На главную</a>
+                    <a href="{{ url_for('register') }}">Регистрация</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

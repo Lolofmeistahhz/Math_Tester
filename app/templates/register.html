@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block content %}
+    {{ super() }}
+    <div class="login-wrapper">
+        <div class="bg">
+            <p>Добро пожаловать в нашу систему тестирования, пожалуйста зарегистрируйте учетную запись для дальнейшего
+                взаимодействия с системой тестирования!</p>
+        </div>
+        <div class="login">
+            <div class="r_content">
+                <h1 class="h">Регистрация</h1>
+
+                {% for cat, msg in get_flashed_messages(True) %}
+
+                    <div class="flash-log {{ cat }}"> {{ msg }}</div>
+                {% endfor %}
+                <form action="" method="post" name="register">
+                    {{ FlaskForm.hidden_tag() }}
+                    <p>
+                        Пожалуйста, введите вашу фамилию:<br>
+                    </p>
+                    <div class="form-el"> {{ FlaskForm.surname(size=34) }}<br></div>
+                    <p>
+                        Пожалуйста, введите ваше имя:<br>
+                    </p>
+                    <div class="form-el"> {{ FlaskForm.name(size=34) }}<br></div>
+                    <p>
+                        Пожалуйста, введите ваше отчество:<br>
+                    </p>
+                    <div class="form-el"> {{ FlaskForm.patronomyc(size=34) }}<br></div>
+                    <p>
+                        Пожалуйста, укажите вашу школу:<br>
+                    </p>
+                    <div class="form-el"> {{ FlaskForm.school(size=34) }}<br></div>
+                    <p>
+                        Пожалуйста, укажите ваш класс:<br>
+                    </p>
+                    <div class="form-el"> {{ FlaskForm.s_class(size=34) }}<br></div>
+                    <p>
+                        Укажите вашего преподавателя:<br>
+                    </p>
+                    <div class="form-el"> {{ FlaskForm.s_teacher(size=34) }}<br></div>
+                    <p>
+                        Пожалуйста, придумайте логин:<br>
+                    </p>
+                    <div class="form-el"> {{ FlaskForm.login(size=34) }}<br></div>
+                    <p>
+                        Пожалуйста, придумайте пароль:<br>
+                    </p>
+                    <div class="form-el"> {{ FlaskForm.password(size=34) }}<br></div>
+                    <div class="r_but">
+                        <p>{{ FlaskForm.submit }}</p>
+                    </div>
+                </form>
+                <div class="na">
+                    <a href="{{ url_for('index') }}">На главную</a>
+                    <a href="{{ url_for('login') }}">Авторизация</a>
+                </div>
+            </div>
+{% endblock %}
