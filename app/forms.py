@@ -11,7 +11,7 @@ class Test_form(FlaskForm):
     answer5 = StringField('answer5',validators=[DataRequired(),Length(max=20)])
     answer6 = StringField('answer6',validators=[DataRequired()])
     answer7 = StringField('answer7',validators=[DataRequired()])
-    button = SubmitField('Завершить тестирование',validators=[DataRequired()],id="test_but")
+    button = SubmitField('Завершить тест',validators=[DataRequired()])
 
     def __init__(self, *args, **kwargs):
         super(Test_form, self).__init__(*args, **kwargs)

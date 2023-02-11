@@ -1,9 +1,8 @@
 import hashlib
 from datetime import datetime
 
-from flask import render_template, request, redirect, url_for, g, flash, session
+from flask import render_template, request, redirect, url_for,flash
 from flask_login import LoginManager, login_user, current_user, logout_user
-from sqlalchemy.orm import aliased
 
 from app import app, db
 from app.forms import Test_form, LoginForm, regForm
@@ -35,7 +34,7 @@ def login():
             else:
                 login_user(user)
                 return redirect(url_for('test_9c'))
-    return render_template("login.html",FlaskForm=form,title="Авторизация")
+    return render_template("login.html",FlaskForm=form, title="Авторизация")
 
 @app.route('/register',methods=["GET", "POST"])
 def register():
@@ -83,7 +82,8 @@ def test_9c():
                 db.session.commit()
                 id = current_user.id
                 hash_id = hashlib.md5(str(id).encode())
-                return redirect(url_for('profile',id=hash_id,title="Личный кабинет"))
+                res = str(hash_id).encode()
+                return redirect(url_for('profile',id=res,title="Личный кабинет"))
         elif testdata:
                 id = current_user.id
                 hash_id = hashlib.md5(str(id).encode())

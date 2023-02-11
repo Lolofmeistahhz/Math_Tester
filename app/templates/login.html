@@ -3,25 +3,21 @@
     {{ super() }}
     <div class="login-wrapper">
         <div class="bg">
-            <p>Добро пожаловать в нашу систему тестирования, пожалуйста пройдите процесс авторизации для дальнейшего взаимодействия с системой!</p>
+            <p>Добро пожаловать в систему тестирования "Верное решение", пожалуйста пройдите процесс авторизации!</p>
         </div>
-        <div class="login l_scroll">
+        <div class="login">
             <div class="l_content">
                 <h1 class="h">Авторизация</h1>
-                {% for cat, msg in get_flashed_messages(True) %}
-
-                    <div class="flash-log {{ cat }}"> {{ msg }}</div>
-                {% endfor %}
-                <form action="" method="post" name="login">
+                <form action="" method="post" name="login" action="{{ url_for('test_9c') }}">
                     {{ FlaskForm.hidden_tag() }}
                     <p>
                         Пожалуйста, введите ваш логин:<br>
                     </p>
-                    <div class="form-el"> {{ FlaskForm.login(size=30) }}<br></div>
+                    <div class="form-el"> {{ FlaskForm.login(size=30,autocomplete="off") }}<br></div>
                     <p>
                         Пожалуйста, введите ваш пароль:<br>
                     </p>
-                    <div class="form-el"> {{ FlaskForm.password(size=30) }}<br></div>
+                    <div class="form-el"> {{ FlaskForm.password(size=30,autocomplete="off") }}<br></div>
                     <div class="but">
                         <p>{{ FlaskForm.submit }}</p>
                     </div>
