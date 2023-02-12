@@ -5,11 +5,13 @@ from flask import render_template, request, redirect, url_for,flash
 from flask_login import LoginManager, login_user, current_user, logout_user
 
 from app import app, db
-from app.forms import Test_form, LoginForm, regForm
+from app.forms import  LoginForm, regForm
 from app.models import Test, User, Test_result
 
 Login_Manager = LoginManager(app)
 
+user_menu=[{'name':'Главная','url':'/index'},{'name':'Авторизация','url':'/login'},{'name':'Тестирование','url':'/test9c'}]
+admin_menu=[{'name':'Главная','url':'/index'},{'name':'Результаты','url':'/admin/test_result'},{'name':'Выход','url':'/logout'}]
 
 @Login_Manager.user_loader
 def load_user(user_id):
@@ -18,7 +20,9 @@ def load_user(user_id):
 @app.route('/')
 @app.route('/index')
 def index():
-    return render_template("index.html")
+    if current_user.is_authenticated and current_user.id == 1:
+        return render_template("index.html", menu=admin_menu)
+    return render_template("index.html", menu=user_menu)
 
 @app.route('/login',methods=["GET", "POST"])
 def login():
@@ -30,11 +34,12 @@ def login():
         if user and user.is_authenticated:
             if user.usertype=="Администратор":
                 login_user(user)
-                return redirect(url_for('test_result'))
+                return render_template("index.html",menu=admin_menu)
             else:
                 login_user(user)
-                return redirect(url_for('test_9c'))
-    return render_template("login.html",FlaskForm=form, title="Авторизация")
+                return redirect(url_for('test_9c',menu=user_menu))
+    return render_template("login.html",FlaskForm=form, title="Авторизация",menu=user_menu)
+
 
 @app.route('/register',methods=["GET", "POST"])
 def register():
@@ -50,60 +55,55 @@ def register():
         elif user:
             flash("Данный логин уже занят!")
             return redirect(url_for('register'))
-    return render_template("register.html",FlaskForm=form,title="Регистрация")
+    return render_template("register.html",FlaskForm=form,title="Регистрация",menu=user_menu)
 
-@app.route('/test9c', methods=["GET", "POST"])
+
+@app.route('/test9c',methods=["GET","POST"])
 def test_9c():
-    test_form = Test_form(request.form, crsf=True)
-    answer = Test.query.filter_by(id=1).first()
     grade = 0
+    answer = Test.query.filter_by(id=1).first()
     if current_user.is_authenticated:
-        testdata = db.session.query(Test_result.grade, Test.Name, Test_result.date_time).filter(
-            Test_result.user == current_user.id).first()
-        if not testdata:
-            if test_form.validate_on_submit():
-                if test_form.answer1.data == answer.Answer1:
+        testdata1 = db.session.query(Test_result)
+        testdata2 = testdata1.join(User, User.id == Test_result.user).filter(Test_result.user == current_user.id).first()
+        if not testdata2:
+            if request.method == "POST":
+                if request.form["answer1"] == answer.Answer1:
                     grade += 1
-                if test_form.answer2.data == answer.Answer2:
+                if request.form["answer2"] == answer.Answer2:
                     grade += 1
-                if test_form.answer3.data == answer.Answer3:
+                if request.form["answer3"] == answer.Answer3:
                     grade += 1
-                if test_form.answer4.data == answer.Answer4:
+                if request.form["answer4"] == answer.Answer4:
                     grade += 1
-                if test_form.answer5.data == answer.Answer5:
+                if request.form["answer5"] == answer.Answer5:
                     grade += 1
-                if test_form.answer6.data == answer.Answer6:
+                if request.form["answer6"] == answer.Answer6:
                     grade += 1
-                if test_form.answer7.data == answer.Answer7:
+                if request.form["answer7"] == answer.Answer7:
                     grade += 1
                 time = datetime.now()
                 res = Test_result(test=1,user=current_user.id,grade=grade,date_time=time)
                 db.session.add(res)
                 db.session.commit()
                 id = current_user.id
-                hash_id = hashlib.md5(str(id).encode())
-                res = str(hash_id).encode()
-                return redirect(url_for('profile',id=res,title="Личный кабинет"))
-        elif testdata:
-                id = current_user.id
-                hash_id = hashlib.md5(str(id).encode())
-                res = str(hash_id).encode()
-                return redirect(url_for('profile', id=res,title="Личный кабинет"))
+                return redirect(url_for('profile',id=id,title="Личный кабинет",menu=user_menu))
+        elif testdata2:
+            id = current_user.id
+            return redirect(url_for('profile',id=id,title="Личный кабинет",menu=user_menu))
     else:
         return redirect(url_for('login'))
-    return render_template("test9c.html",FlaskForm=test_form,answer=answer,title="Тестирование")
-
+    return render_template("test9c.html",answer=answer,title="Тестирование",menu=user_menu)
 
 @app.route('/logout')
 def logout():
     logout_user()
-    return redirect(url_for('index'))
+    return redirect(url_for('index',menu=user_menu))
 
 @app.route('/profile/<string:id>')
 def profile(id):
     user = User.query.filter_by(id=current_user.id).first()
     testdata = db.session.query(Test_result.grade,Test.Name,Test_result.date_time).filter(Test_result.user == current_user.id).order_by(Test_result.date_time.desc()).limit(1)
-    return render_template('profile.html',user=user,testdata=testdata,title="Личный кабинет")
+    return render_template('profile.html',user=user,testdata=testdata,title="Личный кабинет",menu=user_menu)
 
 @app.route('/admin/test_result')
 def test_result():
@@ -114,9 +114,9 @@ def test_result():
         Test_result.user == User.id).filter(Test_result.test == Test.id).order_by(Test_result.user.desc()).paginate(
         page=page, per_page=5)
     if user.usertype == "Администратор":
-        return render_template('test_result.html',pagination=pagination,title="Просмотр результатов")
+        return render_template('test_result.html',pagination=pagination,title="Просмотр результатов",menu=admin_menu)
     elif user.usertype == "Пользователь":
-        return redirect(url_for('test_9c'))
+        return redirect(url_for('test_9c',menu=user_menu))
 
 # @app.route('/add/admin/u')
 # def adda():

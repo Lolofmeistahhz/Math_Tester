@@ -18,50 +18,65 @@
                             <li>секунды</li>
                         </ul>
                     </div>
-            <form name="test" method="POST" action="{{ url_for('test_9c') }}" onsubmit="{{ url_for('test_9c') }}" >
-                {{ FlaskForm.hidden_tag() }}
+            <form name="test" method="POST" action="" onsubmit="{{ url_for('profile',id=profile)}}" >
+{#                {{ FlaskForm.hidden_tag() }}#}
                 <div class="item">
                     <h3>Вопрос номер 1</h3>
                     <p> {{ answer.Question1 }}</p>
-                    {{ FlaskForm.answer1(autocomplete="off") }}<br>
+                    <input type="text" name="answer1" id="answer1" required autocomplete="off">
+{#                    {{ FlaskForm.answer1(autocomplete="off") }}#}
+                    <br>
                 </div>
                 <div class="item">
                     <h3>Вопрос номер 2</h3>
                     <p> {{ answer.Question2 }} </p>
                     <img src="../static/images/formulas.jpg" class="formulas">
-                    {{ FlaskForm.answer2(autocomplete="off") }}<br>
+                    <input type="text" name="answer2" id="answer2" required autocomplete="off">
+{#                    {{ FlaskForm.answer2(autocomplete="off") }}#}
+                    <br>
                 </div>
                 <div class="item">
                     <h3>Вопрос номер 3</h3>
                     <p> {{ answer.Question3 }}</p>
-                    {{ FlaskForm.answer3(autocomplete="off") }}<br>
+                    <input type="text" name="answer3" id="answer3" required autocomplete="off">
+{#                    {{ FlaskForm.answer3(autocomplete="off") }}#}
+                    <br>
                 </div>
                 <div class="item">
                     <h3>Вопрос номер 4</h3>
                     <p> {{ answer.Question4 }}</p>
-                    {{ FlaskForm.answer4(autocomplete="off") }}<br>
+                    <input type="text" name="answer4" id="answer4" required autocomplete="off">
+{#                    {{ FlaskForm.answer4(autocomplete="off") }}#}
+                    <br>
                 </div>
                 <div class="item">
                     <h3>Вопрос номер 5</h3>
                     <p> {{ answer.Question5 }} </p>
-                    {{ FlaskForm.answer5(autocomplete="off") }}<br>
+                    <input type="text" name="answer5" id="answer5" required autocomplete="off">
+{#                    {{ FlaskForm.answer5(autocomplete="off") }}#}
+                    <br>
                 </div>
                 <div class="item">
                     <h3>Вопрос номер 6</h3>
                     <p> {{ answer.Question6 }}</p>
-                    {{ FlaskForm.answer6(autocomplete="off") }}<br>
+                    <input type="text" name="answer6" id="answer6" required autocomplete="off">
+{#                    {{ FlaskForm.answer6(autocomplete="off") }}#}
+                    <br>
                 </div>
                 <div class="item">
                     <h3>Вопрос номер 7</h3>
                     <p>{{ answer.Question7 }}</p>
-                    {{ FlaskForm.answer7(autocomplete="off") }}<br>
+                    <input type="text" name="answer7" id="answer7" required autocomplete="off">
+{#                    {{ FlaskForm.answer7(autocomplete="off") }}#}
+                    <br>
                 </div>
                 <div class="item">
                     <div class="c_but">
-                        {{ FlaskForm.button }}<br>
+                        <input type="submit" name="button" id="button" required>
+{#                        {{ FlaskForm.button }}#}
+                        <br>
                     </div>
                 </div>
-
             </form>
         </div>
     </div>

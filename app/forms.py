@@ -3,18 +3,19 @@ from wtforms import SubmitField, StringField, PasswordField
 from wtforms.validators import DataRequired, Length
 
 
-class Test_form(FlaskForm):
-    answer1 = StringField('answer1',validators=[DataRequired()])
-    answer2 = StringField('answer2',validators=[DataRequired()])
-    answer3 = StringField('answer3',validators=[DataRequired()])
-    answer4 = StringField('answer4',validators=[DataRequired()])
-    answer5 = StringField('answer5',validators=[DataRequired(),Length(max=20)])
-    answer6 = StringField('answer6',validators=[DataRequired()])
-    answer7 = StringField('answer7',validators=[DataRequired()])
-    button = SubmitField('Завершить тест',validators=[DataRequired()])
+# class Test_form(FlaskForm):
+#     answer1 = StringField('answer1',validators=[DataRequired()])
+#     answer2 = StringField('answer2',validators=[DataRequired()])
+#     answer3 = StringField('answer3',validators=[DataRequired()])
+#     answer4 = StringField('answer4',validators=[DataRequired()])
+#     answer5 = StringField('answer5',validators=[DataRequired(),Length(max=20)])
+#     answer6 = StringField('answer6',validators=[DataRequired()])
+#     answer7 = StringField('answer7',validators=[DataRequired()])
+#     button = SubmitField('Завершить тест',validators=[DataRequired()])
+#
+#     def __init__(self, *args, **kwargs):
+#         super(Test_form, self).__init__(*args, **kwargs)
 
-    def __init__(self, *args, **kwargs):
-        super(Test_form, self).__init__(*args, **kwargs)
 
 
 class LoginForm(FlaskForm):

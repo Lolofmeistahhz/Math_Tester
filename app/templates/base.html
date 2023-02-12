@@ -20,11 +20,16 @@
 </head>
 <body>
 <div class="container">
+
+{% if menu %}
+    {% block menu %}
     <nav class="menu">
-        <a href="{{ url_for('index') }}" class="menu-item">Главная</a>
-        <a href="{{ url_for('login') }}" class="menu-item">Авторизация</a>
-        <a href="{{ url_for('test_9c') }}" class="menu-item">Тестирование</a>
+        {% for m in menu %}
+        <a href="{{ m['url'] }}" class="menu-item">{{ m['name'] }}</a>
+        {%  endfor %}
     </nav>
+    {% endblock %}
+{% endif %}
     {% block content %}
 
     {% endblock %}
