@@ -19,12 +19,10 @@
                         </ul>
                     </div>
             <form name="test" method="POST" action="" onsubmit="{{ url_for('profile',id=profile)}}" >
-{#                {{ FlaskForm.hidden_tag() }}#}
                 <div class="item">
                     <h3>Вопрос номер 1</h3>
                     <p> {{ answer.Question1 }}</p>
                     <input type="text" name="answer1" id="answer1" required autocomplete="off">
-{#                    {{ FlaskForm.answer1(autocomplete="off") }}#}
                     <br>
                 </div>
                 <div class="item">
@@ -32,53 +30,49 @@
                     <p> {{ answer.Question2 }} </p>
                     <img src="../static/images/formulas.jpg" class="formulas">
                     <input type="text" name="answer2" id="answer2" required autocomplete="off">
-{#                    {{ FlaskForm.answer2(autocomplete="off") }}#}
                     <br>
                 </div>
                 <div class="item">
                     <h3>Вопрос номер 3</h3>
                     <p> {{ answer.Question3 }}</p>
                     <input type="text" name="answer3" id="answer3" required autocomplete="off">
-{#                    {{ FlaskForm.answer3(autocomplete="off") }}#}
                     <br>
                 </div>
                 <div class="item">
                     <h3>Вопрос номер 4</h3>
                     <p> {{ answer.Question4 }}</p>
                     <input type="text" name="answer4" id="answer4" required autocomplete="off">
-{#                    {{ FlaskForm.answer4(autocomplete="off") }}#}
                     <br>
                 </div>
                 <div class="item">
                     <h3>Вопрос номер 5</h3>
                     <p> {{ answer.Question5 }} </p>
                     <input type="text" name="answer5" id="answer5" required autocomplete="off">
-{#                    {{ FlaskForm.answer5(autocomplete="off") }}#}
                     <br>
                 </div>
                 <div class="item">
                     <h3>Вопрос номер 6</h3>
                     <p> {{ answer.Question6 }}</p>
                     <input type="text" name="answer6" id="answer6" required autocomplete="off">
-{#                    {{ FlaskForm.answer6(autocomplete="off") }}#}
                     <br>
                 </div>
                 <div class="item">
                     <h3>Вопрос номер 7</h3>
                     <p>{{ answer.Question7 }}</p>
                     <input type="text" name="answer7" id="answer7" required autocomplete="off">
-{#                    {{ FlaskForm.answer7(autocomplete="off") }}#}
                     <br>
                 </div>
                 <div class="item">
                     <div class="c_but">
                         <input type="submit" name="button" id="button" required>
-{#                        {{ FlaskForm.button }}#}
                         <br>
                     </div>
                 </div>
             </form>
         </div>
     </div>
+    <script type="text/javascript">
+            setTimeout('window.location="login"', 5460000);
+        </script>
     <script src="../static/scripts/countdown.function.js"></script>
 {% endblock %}
